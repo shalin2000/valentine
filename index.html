@@ -55,19 +55,20 @@
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative; /* IMPORTANT */
     }
     
     .slideshow img {
+      position: absolute;
+      inset: 0;
+      margin: auto;
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      position: absolute;
       opacity: 0;
       transition: opacity 1s ease;
     }
+
 
     .slideshow img.active {
       opacity: 1;
@@ -75,7 +76,8 @@
 
     .buttons {
       position: relative;
-      height: 140px;
+      height: 160px; /* slightly taller for movement */
+      margin-top: 10px;
     }
 
     button {
@@ -172,22 +174,18 @@
     
     const buttonsContainer = document.querySelector(".buttons");
 
-    let currentX = 0;
-    let currentY = 0;
-
-    // Maximum movement range (safe inside container)
-    const MAX_X = 120;
-    const MAX_Y = 80;
+    let moveX = 0;
+    let moveY = 0;
+    
+    const MAX_X = 110;
+    const MAX_Y = 70;
     
     function moveNoButton() {
-      const newX = (Math.random() * MAX_X * 2) - MAX_X;
-      const newY = (Math.random() * MAX_Y * 2) - MAX_Y;
-    
-      currentX = newX;
-      currentY = newY;
+      moveX = (Math.random() * MAX_X * 2) - MAX_X;
+      moveY = (Math.random() * MAX_Y * 2) - MAX_Y;
     
       noBtn.style.transition = "transform 0.15s ease";
-      noBtn.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
     }
     
     // Desktop
