@@ -174,30 +174,25 @@
     
     const buttonsContainer = document.querySelector(".buttons");
 
-    let moveX = 0;
-    let moveY = 0;
-    
-    const MAX_X = 110;
-    const MAX_Y = 70;
+    const MAX_X = 120;
+    const MAX_Y = 85;
     
     function moveNoButton() {
-      moveX = (Math.random() * MAX_X * 2) - MAX_X;
-      moveY = (Math.random() * MAX_Y * 2) - MAX_Y;
+      // big jump
+      const jumpX = (Math.random() * MAX_X * 2) - MAX_X;
+      const jumpY = (Math.random() * MAX_Y * 2) - MAX_Y;
     
-      noBtn.style.transition = "transform 0.15s ease";
-      noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      noBtn.style.transition = "none";
+      noBtn.style.transform = `translate(${jumpX}px, ${jumpY}px)`;
+    
+      // SECOND jump shortly after (extra evil 😈)
+      setTimeout(() => {
+        const jumpX2 = (Math.random() * MAX_X * 2) - MAX_X;
+        const jumpY2 = (Math.random() * MAX_Y * 2) - MAX_Y;
+        noBtn.style.transform = `translate(${jumpX2}px, ${jumpY2}px)`;
+      }, 60);
     }
     
-    // Desktop
-    noBtn.addEventListener("mouseenter", moveNoButton);
-    
-    // Mobile
-    noBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      moveNoButton();
-    });
-
-
     noBtn.addEventListener("mouseenter", moveNoButton);
     noBtn.addEventListener("touchstart", (e) => {
       e.preventDefault();
